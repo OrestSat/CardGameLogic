@@ -2,10 +2,14 @@
 
 one:
   state: MyString
-  attacker: 1
+  attacker: 
   defender: 1
+  name: MyString
+  description: MyString
 
 two:
   state: MyString
-  attacker: 1
+  attacker: 
   defender: 1
+  name: MyString
+  description: MyString

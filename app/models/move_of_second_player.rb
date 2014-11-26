@@ -1,20 +1,31 @@
 require "game_state"
+require "move_of_first_player"
 
 class MoveOfSecondPlayer < GameState
 
 	def initialize _game
 		super _game
 	end
-	def get_card_from_player _card, _table, _player
-		if @game.attacker == _player.id
+	def get_card_from_player _card, _player_id
+		if @game.attacker == _player_id
 
 			@game.set_game_state(MoveOfFirstPlayer.new @game)
-			@game.take_card_from_player _card, _table
+			@game.do_get_card_from_player _card
 
-			@attacker = @defender
-			@defender = _player.id
+			@game.attacker = @game.defender
+			@game.defender = _player_id
 		else
-			_player.add_card _card
+			@game.players[0].add_card _card
 		end
 	end
+
+	# def put_card_on_table(_card )
+	# 	if @game.attacker == self.players[1].id
+	# 		@game.push_card( _card )
+	# 		@game.set_game_state(MoveOfFirstPlayer.new @game)
+
+	# 		@game.attacker = @game.defender
+	# 		@game.defender = self.players[1].id
+	# 	end
+	# end
 end

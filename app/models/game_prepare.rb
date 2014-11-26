@@ -7,8 +7,8 @@ class GamePrepare < GameState
 		super _game
 	end
 
-	def prepare_game_to_start _deck
-		@game.do_preparation_for_game _deck
+	def prepare_game_to_start
+		@game.do_preparation_for_game
 		@game.set_game_state(MoveOfFirstPlayer.new @game)
 	end
 end

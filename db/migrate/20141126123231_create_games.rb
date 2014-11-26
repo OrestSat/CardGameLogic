@@ -4,6 +4,8 @@ class CreateGames < ActiveRecord::Migration
       t.string :state
       t.integer :attacker
       t.integer :defender
+      t.string :name
+      t.string :description
 
       t.timestamps
     end

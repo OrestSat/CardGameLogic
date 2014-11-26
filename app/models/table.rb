@@ -7,12 +7,12 @@ class Table < ActiveRecord::Base
 	def put_cards
 		cards = self.table_cards
 		self.table_cards = []
-		self.count = 0
+		self.cards_count = 0
 		cards
- 	end
+	end
 
- def add_card new_card
-  self.table_cards.push new_card
-  self.count  += 1
- end
+	def add_card new_card
+		self.table_cards.push new_card
+		self.cards_count  += 1
+	end
 end

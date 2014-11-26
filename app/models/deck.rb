@@ -1,8 +1,6 @@
 class Deck < ActiveRecord::Base
 	serialize :deck_cards, Array
 
-	attr_accessible :game_id
-
 	belongs_to :game
 
 	# def initialize

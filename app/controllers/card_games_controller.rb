@@ -9,41 +9,47 @@ class CardGamesController < ApplicationController
   # GET /card_games.json
   def index
     if params[:sort] === nil || params[:direction] === nil
-      @card_games = CardGame.all.paginate(:per_page => 5, :page => params[:page]).search(params[:search])
+      @card_games = Game.all.paginate(:per_page => 5, :page => params[:page]).search(params[:search])
     else
-      @card_games = CardGame.order(params[:sort] + ' ' + params[:direction]).paginate(:per_page => 5, :page => params[:page]).search(params[:search])
+      @card_games = Game.order(params[:sort] + ' ' + params[:direction]).paginate(:per_page => 5, :page => params[:page]).search(params[:search])
     end
   end
 
   # GET /card_games/1
   # GET /card_games/1.json
   def show
-    @params = params[:id]
+    
   end
 
   # GET /card_games/new
   def new
-    @card_game = CardGame.new
+    # @card_game = Game.new
   end
 
   # GET /card_games/1/edit
   def edit
+       @params = params
   end
 
   # POST /card_games
   # POST /card_games.json
   def create
-    @card_game = CardGame.new(card_game_params)
+    @card_game = Game.new(card_game_params)
+    @card_game.save
+    @card_game.init
+    @card_game.init_player 1
+    @card_game.init_player 2
+    @card_game.prepare_game_to_start 
 
-    respond_to do |format|
-      if @card_game.save
-        format.html { redirect_to @card_game, notice: 'Card game was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @card_game }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @card_game.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @card_game.save
+    #     format.html { redirect_to @card_game, notice: 'Card game was successfully created.' }
+    #     format.json { render action: 'show', status: :created, location: @card_game }
+    #   else
+    #     format.html { render action: 'new' }
+    #     format.json { render json: @card_game.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /card_games/1
@@ -73,11 +79,11 @@ class CardGamesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_card_game
-      @card_game = CardGame.find(params[:id])
+      @card_game = Game.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_game_params
-      params.require(:card_game).permit(:title, :notes)
+      params.require(:card_game).permit(:name, :description)
     end
 end
