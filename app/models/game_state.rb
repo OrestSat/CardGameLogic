@@ -20,6 +20,6 @@ class GameState
 	# end
 
 	def operation_is_not_allowed operation_name
-		puts "Oparation #{operation_name} is not allowed for Order's state #{@game.state[0].class.name}" 
+		puts "Oparation #{operation_name} is not allowed for Order's state #{@game.state_name}" 
 	end
 end

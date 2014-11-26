@@ -3,38 +3,53 @@ require "deck"
 require "card"
 
 class Game < ActiveRecord::Base
-	serialize :state, Array
 
-has_many :players
-has_one :deck
-has_one :table
+	has_many :players
+	has_one :deck
+	has_one :table
+
+	def init_state
+    case self.state_name
+    when 'NewGame'
+    	@state = NewGame.new self
+    when 'ExpectationOfSecondPlayer'
+    	@state = ExpectationOfSecondPlayer.new self
+    when 'GamePrepare'
+    	@state = GamePrepare.new self
+    when 'MoveOfFirstPlayer'
+    	@state = MoveOfFirstPlayer.new self
+    when 'MoveOfSecondPlayer'
+    	@state = MoveOfSecondPlayer.new self
+    end
+    @state
+	end
 
 	def set_game_state _state
-		self.state.clear 
-		self.state = [_state]
+		@state = _state
+		self.state_name = _state.class.name
 	end
 	# def get_game_state
 	# 	self.state
 	# end
-  def init
-    self.state[0] = NewGame.new(self)
-    # Deck.create({:game => self})
-  end
-
-  # def create_deck
-  #   Deck.create({:game => self}).init_cards
-  # end
-
-	def init_player _user
-		self.state[0].init_player _user
+	def init
+		@state = NewGame.new(self)
+		# Deck.create({:game => self})
 	end
 
-	def prepare_game_to_start 
-		self.state[0].prepare_game_to_start
+	# def create_deck
+	#   Deck.create({:game => self}).init_cards
+	# end
+
+	def init_player _user
+		@state.init_player _user
+	end
+
+	def prepare_game_to_start
+		@state.prepare_game_to_start
 	end
 
 	def get_card_from_player _card, _player_id
-		self.state[0].get_card_from_player _card, _player_id
+		@state.get_card_from_player _card, _player_id
 	end
 
 	def do_init_first_player _user
@@ -49,7 +64,7 @@ has_one :table
 		self.defender = player.id
 	end
 
-	def do_preparation_for_game 
+	def do_preparation_for_game
 		puts "Doing preparation for game..."
 		table = Table.create({:game => self, :cards_count => 0})
 		deck = Deck.create({:game => self})
@@ -69,13 +84,13 @@ has_one :table
 	# end
 
 
-	def self.search(search)  
-   	 if search  
-      	find(:all, :conditions => ['title LIKE ?', "%#{search}%"])  
-    	else  
-      		find(:all)  
-    	end  
-  	end 
+	def self.search(search)
+		if search
+			find(:all, :conditions => ['title LIKE ?', "%#{search}%"])
+		else
+			find(:all)
+		end
+	end
 end
 
 

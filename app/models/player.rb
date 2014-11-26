@@ -10,25 +10,22 @@ class Player < ActiveRecord::Base
   #   self.cards_count = 0
   # end
 
- # def put_card _card
- #  if self.cards_count > 0
- #   self.cards_count -= 1
- #   for i in self.player_cards do
- #    if self.player_cards[i].rang == _card.rang && self.player_cards[i].suite == _card.suite
- #     self.player_cards.delete_at i
- #    end
- #   end
- #  else
- #   puts 'Empty'
- #  end
- # end
-
-  def put_card(_card_id)
-    if self.game.put_card_on_table self.player_cards[_card_id] then
-      self.player_cards.delete_at _card_id
-      self.cards_count -= 1
-    end
+ def put_card _card_id
+  if self.cards_count > 0 
+    card = self.player_cards.delete_at _card_id
+    self.cards_count -= 1 
+    card
+  else
+   puts 'Empty'
   end
+ end
+
+  # def put_card(_card_id)
+  #   if self.game.put_card_on_table self.player_cards[_card_id] then
+  #     self.player_cards.delete_at _card_id
+  #     self.cards_count -= 1
+  #   end
+  # end
 
  def init
   if !self.cards_count
