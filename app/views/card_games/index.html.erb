@@ -1,0 +1,35 @@
+<div class = "row">
+    <div class = "col-md-10 pull-right">
+        <div class = "jumbotron text-center">
+            <h2>Games</h2>
+            <%= form_tag card_games_path, :id => 'card_games_search' , :class => 'form-horizontal' , :method => 'get' do %>  
+            <%= hidden_field_tag :direction, params[:direction] %>  
+            <%= hidden_field_tag :sort, params[:sort] %>  
+            <p class = "col-md-4">  
+            <%= text_field_tag :search, params[:search], :class => 'form-control ', :id => 'search' %>  
+            </p>
+            <p class = "pull-left">
+            <%= submit_tag "Search", :class => 'btn btn-default pull-right' , :name => nil %>  
+            </p>  
+            <% end %> 
+            <div class = "table table-striped" id = "card_games"><%= render 'card_games' %></div>
+             <%= will_paginate @card_games %> 
+         <%= link_to 'New Card game', new_card_game_path, :class => 'btn btn-success' %>
+        </div>
+    </div>
+
+
+    <div class = "container col-md-2 " id = "left_bar">
+        <div >
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item">Games Available</a>
+                <a href="#" class="list-group-item list-group-item">Statistics</a>
+                <a href="#" class="list-group-item list-group-item">Spactate game</a>
+                <a href="#" class="list-group-item list-group-item">Record Room</a>
+            </div>
+                
+        </div>
+    </div>
+</div>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>

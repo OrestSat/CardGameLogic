@@ -1,0 +1,22 @@
+<table class = "table table-striped">
+    <thead>
+        <tr>
+            <th><%= sortable "Title" %> </th>
+            <th><%= sortable "Notes" %></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @card_games.each do |card_game| %>
+        <tr>
+            <td><%= card_game.title %></td>
+            <td><%= card_game.notes %></td>
+            <td><%= link_to 'Show', card_game, :class => 'btn ' %></td>
+            <td><%= link_to 'Edit', edit_card_game_path(card_game), :class => 'btn btn-default' %></td>
+            <td><%= link_to 'Destroy', card_game, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
