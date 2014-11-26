@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  state: MyString
-  attacker: 
+  state: MyText
+  attacker: 1
   defender: 1
-  name: MyString
-  description: MyString
+  name: 
+  description: MyText
 
 two:
-  state: MyString
-  attacker: 
+  state: MyText
+  attacker: 1
   defender: 1
-  name: MyString
-  description: MyString
+  name: 
+  description: MyText
