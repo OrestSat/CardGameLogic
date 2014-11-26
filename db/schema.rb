@@ -11,11 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117224210) do
+ActiveRecord::Schema.define(version: 20141126094110) do
 
   create_table "card_games", force: true do |t|
     t.string   "title"
     t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "decks", force: true do |t|
+    t.integer  "game_id"
+    t.text     "deck_cards"
+    t.integer  "cursor"
+    t.string   "trump"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "games", force: true do |t|
+    t.string   "state"
+    t.integer  "attacker"
+    t.integer  "defender"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "players", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "game_id"
+    t.text     "player_cards"
+    t.integer  "cards_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tables", force: true do |t|
+    t.text     "table_cards"
+    t.integer  "game_id"
+    t.integer  "cards_count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

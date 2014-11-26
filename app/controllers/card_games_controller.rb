@@ -18,6 +18,7 @@ class CardGamesController < ApplicationController
   # GET /card_games/1
   # GET /card_games/1.json
   def show
+    @params = params[:id]
   end
 
   # GET /card_games/new
