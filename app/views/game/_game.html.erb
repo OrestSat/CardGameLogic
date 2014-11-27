@@ -1,0 +1,20 @@
+<table class = "table table-striped">
+    <thead>
+        <tr>
+            <th><%= sortable "Name" %> </th>
+            <th><%= sortable "Description" %></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @games.each do |game| %>
+        <tr>
+            <td><%= game.name %></td>
+            <td><%= game.description %></td>
+            <td><%= link_to 'Show', game, :class => 'btn ' %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>

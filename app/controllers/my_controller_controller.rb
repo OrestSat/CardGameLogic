@@ -20,17 +20,15 @@ class GameController < ApplicationController
     @game.init_player self.current_user
     @game.players[0].save
 
-
-    render action: 'show'
-    # respond_to do |format|
-    #   if @game.save
-    #     format.html { redirect_to @game, notice: 'Card game was successfully created.' }
-    #     format.json { render action: 'show', status: :created, location: @game }
-    #   else
-    #     format.html { render action: 'new' }
-    #     format.json { render json: @game.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    respond_to do |format|
+      if @game.save
+        format.html { redirect_to @game, notice: 'Card game was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @game }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @game.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
       def game_params

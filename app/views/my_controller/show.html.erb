@@ -1,3 +1,7 @@
+<h1>MyController#show</h1>
+<p>Find me in app/views/my_controller/show.html.erb</p>
+
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -29,6 +33,8 @@
   <strong>Player2 cards:</strong>
   <%= @game.players[1].player_cards%>
 </p>
+
+<%= link_to 'Back', games_path %>
  
 <p>
 <%= @params %>
